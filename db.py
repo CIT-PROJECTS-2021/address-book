@@ -36,7 +36,6 @@ def get_id(entry):
 def insert_contact(contact):
     cfg.C.execute('INSERT INTO Contacts VALUES (?,?,?,?,?)',
                   contact)
-
     cfg.DB.commit()
 
 
