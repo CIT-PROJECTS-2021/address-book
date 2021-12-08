@@ -21,12 +21,12 @@ CIT Python, First  group project
 # Modules:
 - **_functions.py_** -- The 'main' program. Open this to start the address book.
 - **_db.py_**     -- Database API
-- **_gui.py_**    -- Controls all GUI related things._ 
+- **new_book.py**    -- Window for creating a new address book or opening an existing address book.
+- **new_book_cw.py**  -- Window used when user doesn't input an address book name.
+- **_gui.py_**    -- Controls all GUI related things. 
 - **add_contact_window.py**    -- Window for adding a new contact.
 - **add_confirmation_window.py**  -- Confirmation window when adding a new contact with missing required fields.
 - **delete_confirmation_window.py** 	  -- Confirmation window when choosing to delete or edit a contact.
-- **edit_contact_window.py**    -- _Window for editing a contact._
+- **edit_contact_window.py**    -- _Window for editing a contact.
 - **edit_confirmation_window.py** -- Confirmation window when user chooses to edit a contact.
-- **new_book.py**    -- Window for opening a new address book._
-- **new_book_cw.py**  -- Window used when user doesn't input an address book name.
 - **no_selection.py**     -- Window used when user tries to delete or edit a contact when nothing is selected.
