@@ -74,8 +74,9 @@ class mainWindow(object):
         # Open Edit Contact Window
         try:
             name = str(self.address_list.get(self.address_list.curselection()))
+
             entry_id = db.get_id(name)
-            self.k = ecw.editContactWindow(self.master, name, entry_id)
+            self.k=ecw.editContactWindow(self.master, name, entry_id)
             self.master.wait_window(self.k.top)
         except:
             self.c = ns.confirmationWindow(self.master)
@@ -103,10 +104,12 @@ class mainWindow(object):
         options = tk.Menu(menu_bar, tearoff=0)
 
         # File Menu
-        options.add_command(label="Save", command=self.save)
-        options.add_command(label="Quit", command=self.quit)
+        options.add_command(label="Save", font='arial 10', command=self.save)
+        options.add_command(label="Quit", font='arial 10', command=self.quit)
         options.add_separator()
         menu_bar.add_cascade(label="File", menu=options)
+
+        self.master.config(menu=menu_bar)
 
         # Scroll bar and box list of contacts
         self.scrollbar = tk.Scrollbar(master)
@@ -123,7 +126,7 @@ class mainWindow(object):
         self.search_bar.grid(row=0, column=4, padx=10)
         self.search_bar.insert(0, '')
 
-        self.search_return = tk.Button(master, text='Search',
+        self.search_return = tk.Button(master, font='arial 12', text='Search',
                                        command=self.search_call)
         self.search_return.grid(row=0, column=3, padx=5)
 
