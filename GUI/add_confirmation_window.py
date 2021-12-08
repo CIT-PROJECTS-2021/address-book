@@ -11,7 +11,7 @@ class confirmationWindow(object):
         self.master = master
         top.title('404')
 
-        self.label = tk.Label(top, font='arial 12', text='A name iis required.')
+        self.label = tk.Label(top, font='arial 12', text='A name is required.')
         self.label.grid(row=0, column=0, padx=10, pady=10)
 
         self.yes_button = tk.Button(top, font='arial 12', text='Ok', command=self.ok)

@@ -30,7 +30,7 @@ def search(search_string):
 
 if __name__ == "__main__":
     root = Tk()
-    root.geometry('600x400')
+    root.geometry('800x600')
     root.config(bg='Gray')
     root.title('Address Book')
     new_book.addNewBookWindow(root)

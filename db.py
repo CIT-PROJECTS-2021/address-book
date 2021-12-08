@@ -53,7 +53,7 @@ def db_commit():
 
 
 def edit_contact(entry_id, entry):
-    entry_update = '''UPDATE Contacts SET Name= ?, Address ?, City = ?, Mobile = ?, Email = ?,WHERE rowid = ? '''
+    entry_update = '''UPDATE Contacts SET Name= ?, Address =?, City = ?, Mobile = ?, Email = ? WHERE rowid = ? '''
 
     cfg.C.execute(entry_update, [entry[0], entry[1], entry[2], entry[3],
                                  entry[4], '{}'.format(entry_id)])
@@ -61,6 +61,6 @@ def edit_contact(entry_id, entry):
 
 def search_contact(search_str):
     search_name = '''SELECT * FROM Contacts WHERE (Name|| Address || City || Mobile || Email) LIKE '%' || ? || '%' ORDER BY Name ASC'''
-    cfg.C.execute(search_name, [search_str])  
+    cfg.C.execute(search_name, [search_str])
 
     return cfg.C
