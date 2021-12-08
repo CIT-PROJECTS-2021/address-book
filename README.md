@@ -1,6 +1,6 @@
-#Address Book by Group 12CIT
+# Address Book by Group 12CIT
 CIT Python, First  group project
-#Contributors: 
+# Contributors: 
 - Hellen Namulinda
 - Kawala Fridah Josephine
 - Nnabakka Maria Gonzaga

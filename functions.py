@@ -8,17 +8,7 @@ import new_book
 
 
 def select_contact(contact):
-    entry = []
-
-    try:
-        if contact.split()[1]:
-            entry.append(contact.split()[0])
-            entry.append(contact.split()[1])
-    except:
-        entry.append('')
-        entry.append(contact.split()[0])
-
-    for row in db.get_entry(db.get_id(entry)):
+    for row in db.get_entry(db.get_id(contact)):
         return row
 
 
@@ -27,18 +17,7 @@ def add_contact(contact):
 
 
 def delete_contact(contact):
-    entry = []
-    try:
-        entry.append(contact.split()[0])
-    except:
-        entry.append('')
-
-    try:
-        entry.append(contact.split()[1])
-    except:
-        entry.append('')
-
-    db.delete_contact(db.get_id(entry))
+    db.delete_contact(db.get_id(contact))
 
 
 def edit_contact(entry_id, contact):

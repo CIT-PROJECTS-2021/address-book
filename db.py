@@ -11,7 +11,7 @@ def db_init(book_name):
         print('Database already exists')
 
     else:
-        cfg.DB = sql.connect(book_name + '.db')
+        cfg.DB = sql.connect(book_name + '.ab')
         cfg.C = cfg.DB.cursor()
         create_table = '''CREATE TABLE Contacts(Name TEXT, Address TEXT, City TEXT, Mobile TEXT, Email TEXT) '''
         cfg.C.execute(create_table)
@@ -26,9 +26,9 @@ def db_exists(db_name):
         return False
 
 
-def get_id(entry):
+def get_id(name):
     entry_id = "SELECT rowid, * FROM Contacts WHERE Name = ?"
-    cfg.C.execute(entry_id, [entry[0]])
+    cfg.C.execute(entry_id, [name])
     for row in cfg.C:
         return row[0]
 
@@ -52,7 +52,7 @@ def db_commit():
     cfg.DB.commit()
 
 
-def edit_entry(entry_id, entry):
+def edit_contact(entry_id, entry):
     entry_update = '''UPDATE Contacts SET Name= ?, Address ?, City = ?, Mobile = ?, Email = ?,WHERE rowid = ? '''
 
     cfg.C.execute(entry_update, [entry[0], entry[1], entry[2], entry[3],
@@ -60,6 +60,7 @@ def edit_entry(entry_id, entry):
 
 
 def search_contact(search_str):
-    cfg.C.execute("SELECT * FROM Contacts WHERE Name = ?", [search_str])
+    search_name = '''SELECT * FROM Contacts WHERE (Name|| Address || City || Mobile || Email) LIKE '%' || ? || '%' ORDER BY Name ASC'''
+    cfg.C.execute(search_name, [search_str])  
 
     return cfg.C

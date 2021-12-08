@@ -2,6 +2,7 @@ import sys
 import tkinter as tk
 
 import add_contact_window as acw
+import db
 import no_selection as ns
 import delete_confirmation_window as dcw
 import edit_contact_window as ecw
@@ -11,6 +12,14 @@ sys.path.insert(0, '..')
 
 
 class mainWindow(object):
+    def search_call(self):
+        self.search_query()
+
+    def search_query(self):
+        self.address_list.delete(0, tk.END)
+
+        for contact in functions.search(self.search_bar.get()):
+            self.address_list.insert(tk.END, contact[0])
 
     def delete_contact(self, name):
         # Deletes selected contact.
@@ -65,19 +74,7 @@ class mainWindow(object):
         # Open Edit Contact Window
         try:
             name = str(self.address_list.get(self.address_list.curselection()))
-            entry = []
-
-            try:
-                entry.append(name.split()[0])
-            except:
-                entry.append('')
-
-            try:
-                entry.append(name.split()[1])
-            except:
-                entry.append('')
-
-            entry_id = functions.get_id(entry)
+            entry_id = db.get_id(name)
             self.k = ecw.editContactWindow(self.master, name, entry_id)
             self.master.wait_window(self.k.top)
         except:
@@ -91,9 +88,25 @@ class mainWindow(object):
         except:
             self.c = ns.confirmationWindow(self.master)
 
+    def save(self):
+        db.db_commit()
+
+    def quit(self):
+        sys.exit()
+
     def __init__(self, master):
         self.master = master
         master.title('Address Book')
+
+        # Menu bar
+        menu_bar = tk.Menu(self.master)
+        options = tk.Menu(menu_bar, tearoff=0)
+
+        # File Menu
+        options.add_command(label="Save", command=self.save)
+        options.add_command(label="Quit", command=self.quit)
+        options.add_separator()
+        menu_bar.add_cascade(label="File", menu=options)
 
         # Scroll bar and box list of contacts
         self.scrollbar = tk.Scrollbar(master)
@@ -104,6 +117,18 @@ class mainWindow(object):
         self.address_list.grid(row=2, column=10, rowspan=15, padx=15)
         self.scrollbar.config(command=self.address_list.yview)
         self.address_list.bind('<<ListboxSelect>>', self.on_select)
+
+        # Search bar
+        self.search_bar = tk.Entry(master)
+        self.search_bar.grid(row=0, column=4, padx=10)
+        self.search_bar.insert(0, '')
+
+        self.search_return = tk.Button(master, text='Search',
+                                       command=self.search_call)
+        self.search_return.grid(row=0, column=3, padx=5)
+
+        # Initialize list of contacts
+        self.search_query()
 
         # Add contact button
         self.add_button = tk.Button(master, font='arial 12', text='Add',
@@ -121,7 +146,7 @@ class mainWindow(object):
         self.edit_button.grid(row=11, column=4, padx=10, sticky=tk.E)
 
         # The fields to display contact information
-        # First name
+        # Name
         self.name_label = tk.Label(master, font='arial 12', text='Name:')
         self.name_label.grid(row=2, column=1)
         self.name = tk.Entry(master, font='arial 12')
