@@ -38,7 +38,7 @@ class addNewBookWindow(object):
         master.columnconfigure(0, weight=1)
         master.columnconfigure(1, weight=3)
 
-        self.instruction_message = tk.Label(self.master, font='arial 12 bold', text='Enter The Name Of Your New Address Book')
+        self.instruction_message = tk.Label(self.master, font='arial 12 bold', text='Enter The Name Of Your Address Book')
         self.instruction_message.grid(**paddings)
 
         # Book Name

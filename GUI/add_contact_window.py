@@ -31,7 +31,7 @@ class newContactWindow(object):
         else:
             self.c = cw.confirmationWindow(self.master)
 
-        gui.mainWindow(self.master)
+        gui.mainWindow(self.master).search_query()
         self.close_window()
 
     def __init__(self, master):
